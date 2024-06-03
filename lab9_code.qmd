@@ -1,0 +1,98 @@
+---
+title: "lab9_code"
+format: html
+editor: visual
+---
+
+## Lab 9: Generative Art
+
+### Author: Rebecca Ioffe
+
+```{r}
+
+#| label: libraries
+
+
+library(ggplot2)
+library(tidyverse)
+
+```
+
+## Art Piece 1
+
+#### Ordinary Plotting functions on data
+
+Description of code choices:
+
+```{r}
+
+#clean dataset for segment plotting
+
+iris <- iris %>%
+  mutate(
+    x0 = Sepal.Length,
+    y0 = Sepal.Width,
+    x1 = Petal.Length,
+    y1 = Petal.Width,
+    shade = Species,
+    size = Sepal.Length
+  )
+
+# Create custom color palate for species color segments
+
+colors <- c("#FF69B4", "#FF1493", "#DB7093")
+
+# Create the segment plot
+ggplot(iris, aes(
+  x = x0,
+  y = y0,
+  xend = x1,
+  yend = y1,
+  color = shade,
+  size = size
+)) +
+  geom_segment(show.legend = FALSE) +
+  geom_point(aes(x = x1, y = y1), size = 3, shape = 18, color = "yellow", alpha = 0.7) +  
+  # Add diamond-shaped, yellow, transparent points
+  coord_polar() +
+  scale_y_continuous(expand = c(0, 0)) +
+  scale_x_continuous(expand = c(0, 0)) + 
+  scale_color_manual(values = custom_colors) + 
+  scale_size(range = c(0, 3)) + 
+  # Make the segments small
+  theme_void() + 
+  theme(plot.caption = element_text(hjust = 0)) +
+  theme(
+    plot.background = element_rect(fill = "black"),
+    panel.background = element_rect(fill = "black"),
+    plot.title = element_text(color = "white", hjust = 0.5),
+    plot.subtitle = element_text(color = "white", hjust = 0.5),
+    plot.caption = element_text(color = "white", hjust = 0.5)
+  ) +
+  labs(
+    title = "Flower Wave",
+    subtitle = "Description:
+      A captivating blend of pink shades representing sepal and petal depths.", 
+    caption = "Polar Plot of Iris Dataset with Segments"
+  )
+
+
+```
+
+```         
+The wave of bright colors, each representing a species of iris contrasts the dark              background. Overlaid like fireflies are the end points of each segment: culminating at the edge of the wave. 
+```
+
+## Art Piece 2
+
+#### Purely generative art piece
+
+Description of code choices:
+
+```{r}
+
+```
+
+```{r}
+
+```
