@@ -15,7 +15,8 @@ editor: visual
 
 library(ggplot2)
 library(tidyverse)
-
+library(ggthemes)
+library(ambient)
 ```
 
 ## Art Piece 1
@@ -25,7 +26,6 @@ library(tidyverse)
 Description of code choices:
 
 ```{r}
-
 #clean dataset for segment plotting
 
 iris <- iris %>%
@@ -35,12 +35,12 @@ iris <- iris %>%
     x1 = Petal.Length,
     y1 = Petal.Width,
     shade = Species,
-    size = Sepal.Length
+    size = Petal.Width
   )
 
 # Create custom color palate for species color segments
 
-colors <- c("#FF69B4", "#FF1493", "#DB7093")
+custom_colors <- c("#FF69B4", "#FF1493", "#DB7093")
 
 # Create the segment plot
 ggplot(iris, aes(
@@ -58,8 +58,6 @@ ggplot(iris, aes(
   scale_y_continuous(expand = c(0, 0)) +
   scale_x_continuous(expand = c(0, 0)) + 
   scale_color_manual(values = custom_colors) + 
-  scale_size(range = c(0, 3)) + 
-  # Make the segments small
   theme_void() + 
   theme(plot.caption = element_text(hjust = 0)) +
   theme(
@@ -71,28 +69,8 @@ ggplot(iris, aes(
   ) +
   labs(
     title = "Flower Wave",
-    subtitle = "Description:
-      A captivating blend of pink shades representing sepal and petal depths.", 
     caption = "Polar Plot of Iris Dataset with Segments"
   )
 
-
 ```
 
-```         
-The wave of bright colors, each representing a species of iris contrasts the dark              background. Overlaid like fireflies are the end points of each segment: culminating at the edge of the wave. 
-```
-
-## Art Piece 2
-
-#### Purely generative art piece
-
-Description of code choices:
-
-```{r}
-
-```
-
-```{r}
-
-```
