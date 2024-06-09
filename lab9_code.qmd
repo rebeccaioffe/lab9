@@ -72,6 +72,9 @@ ggplot(iris, aes(
   )
 
 
+
+```
+
 Description:
 
 The wave of bright colors, each representing a species of iris contrasts the dark background. Overlaid like fireflies are the end points of each segment: culminating at the edge of the wave. 
@@ -81,8 +84,7 @@ The wave of bright colors, each representing a species of iris contrasts the dar
 
 #### Purely generative art piece
 
-Description of code choices:
-
+Description of code choices: 
 
 ```{r}
 
@@ -121,6 +123,6 @@ labs(
 Description: 
 
 Inspired by the human body: red blood cells and veins flow underneath the surface of the skin. The concentric spheres represent the cyclical nature of human life with oblong ripples representing cells. The bright red and blue color palate pay tribute to the functions of the human body. 
-```
+
 
 
