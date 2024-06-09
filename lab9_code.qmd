@@ -12,7 +12,6 @@ editor: visual
 
 #| label: libraries
 
-
 library(ggplot2)
 library(tidyverse)
 library(ggthemes)
@@ -72,5 +71,56 @@ ggplot(iris, aes(
     caption = "Polar Plot of Iris Dataset with Segments"
   )
 
+
+Description:
+
+The wave of bright colors, each representing a species of iris contrasts the dark background. Overlaid like fireflies are the end points of each segment: culminating at the edge of the wave. 
+
+
+## Art Piece 2
+
+#### Purely generative art piece
+
+Description of code choices:
+
+
+```{r}
+
+sample_canva <- function(seed = NULL) {
+  if(!is.null(seed)) set.seed(seed)
+  sample(ggthemes::canva_palettes, 1)[[1]]
+}
 ```
+
+
+```{r}
+grid <- long_grid(seq(1, 10, length.out = 1000), seq(1, 10, length.out = 1000))
+
+
+grid  %>%
+  mutate(
+    noise = gen_perlin(x,y, frequency = 0.9), 
+    ripple = gen_waves(x,y, frequency = 5), 
+    gate = gen_spheres(x,y, frequency = 25) %>% normalize(), 
+    paint = noise + (1 + ripple) * (gate >= 0.1 & gate < 0.5)
+  ) %>%
+    ggplot(aes(x, y, fill = paint)) + 
+    geom_raster(show.legend = FALSE) +
+    theme_void() +
+    coord_equal() +
+    scale_x_continuous(expand = c(0, 0)) +
+    scale_y_continuous(expand = c(0, 0)) +
+    scale_fill_gradientn(colours = sample_canva(seed = 54)) +
+labs(
+    title = "Functional Anatomy",
+  )
+
+
+```
+
+Description: 
+
+Inspired by the human body: red blood cells and veins flow underneath the surface of the skin. The concentric spheres represent the cyclical nature of human life with oblong ripples representing cells. The bright red and blue color palate pay tribute to the functions of the human body. 
+```
+
 
