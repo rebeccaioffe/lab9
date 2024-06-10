@@ -72,6 +72,9 @@ ggplot(iris, aes(
   )
 
 
+
+```
+
 Description:
 
 The wave of bright colors, each representing a species of iris contrasts the dark background. Overlaid like fireflies are the end points of each segment: culminating at the edge of the wave. 
@@ -81,8 +84,20 @@ The wave of bright colors, each representing a species of iris contrasts the dar
 
 #### Purely generative art piece
 
-Description of code choices:
+Description of code choices: 
 
+The sample canva function uses the ggthemes package to randomly generate color palates for the art pieces depending on the seed number inputted by the user. I used this function from the learning to start out exploring with generative art. The link to the function source is provided below. 
+
+I created a grid of 1000 by 1000 data points by randomly generating two sequences of numbers from 1 to 10 with length 1000. Then, the long_grid function creates an x-y grid of these points based on this generation. This grid will be "canvas" that I will then use dplyr on to plot the art piece. 
+
+Then I added different types of noise to the data (grid) by using the gen_perlin, gen_waves, and gen_spheres noise generators from the ambient package. I used a frequency of 0.9 for the perlin noise for a lower frequency and a larger perlin shape. I used a frequency of 5 for gen_waves because it created wave patterns in the art with more frequent waves. Larger frequencies resulted in more, however smaller, wave patterns. Then I generated spheres with a frequency of 25 which resulted in many, smaller spheres and normalized this value with the normalize() function. This made sure that the values in gen_spheres are contained between 0 and 1. Then I used the paint object to combine the different noise patterns by the conditional values of the gate spheres. I plotted a raster plot with a custom color palate, generated from the sample_canva() function with a seed of 54, and formatted the axes, scale, and title
+
+Link to function source: 
+
+https://art-from-code.netlify.app/day-1/session-2/#why-dplyr-is-a-girls-best-friend
+Link to ambient documentation: 
+
+https://cran.r-project.org/web/packages/ambient/ambient.pdf
 
 ```{r}
 
@@ -121,6 +136,6 @@ labs(
 Description: 
 
 Inspired by the human body: red blood cells and veins flow underneath the surface of the skin. The concentric spheres represent the cyclical nature of human life with oblong ripples representing cells. The bright red and blue color palate pay tribute to the functions of the human body. 
-```
+
 
 
