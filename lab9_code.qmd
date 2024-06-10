@@ -58,8 +58,14 @@ ggplot(iris, aes(
   coord_polar() +
   scale_y_continuous(expand = c(0, 0)) +
   scale_x_continuous(expand = c(0, 0)) + 
+  
+  # add color pallate
+  
   scale_color_manual(values = custom_colors) + 
   theme_void() + 
+  
+  # format theme with plot background, title, subtitle, and caption
+  
   theme(plot.caption = element_text(hjust = 0)) +
   theme(
     plot.background = element_rect(fill = "black"),
