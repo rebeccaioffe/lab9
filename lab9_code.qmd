@@ -24,6 +24,8 @@ library(ambient)
 
 Description of code choices:
 
+Description of code choices: I chose to create a segment plot of the iris data set in base r. The color palate was chosen for the different species of iris: corresponding to the "shade" argument. The variables sepal length, sepal width, petal length, and petal width were included in the plot as varying arguments. I played around with the width of the segments - choosing the variable petal width as the length of each segment. adding an argument to I added yellow points, formatted for visual appeal with transparency, color, and shape, at the end of each segment in the plot. Then I formatted the background, added a description, and created a title and caption for the plot. 
+
 ```{r}
 #clean dataset for segment plotting
 
