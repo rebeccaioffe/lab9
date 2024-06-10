@@ -27,51 +27,53 @@ Description of code choices:
 Description of code choices: I chose to create a segment plot of the iris data set in base r. The color palate was chosen for the different species of iris: corresponding to the "shade" argument. The variables sepal length, sepal width, petal length, and petal width were included in the plot as varying arguments. I played around with the width of the segments - choosing the variable petal width as the length of each segment. adding an argument to I added yellow points, formatted for visual appeal with transparency, color, and shape, at the end of each segment in the plot. Then I formatted the background, added a description, and created a title and caption for the plot. 
 
 ```{r}
-#clean dataset for segment plotting
 
-iris <- iris %>%
-  mutate(
-    x0 = Sepal.Length,
-    y0 = Sepal.Width,
-    x1 = Petal.Length,
-    y1 = Petal.Width,
-    shade = Species,
-    size = Petal.Width
-  )
 
-# Create custom color palate for species color segments
+# Define the function
+create_polar_plot <- function(data, title, caption) {
+  # Create custom color palette for species color segments
+  custom_colors <- c("#FF69B4", "#FF1493", "#DB7093")
+  
+  # Create the plot
+  plot <- ggplot(data, aes(
+    x = x0,
+    y = y0,
+    xend = x1,
+    yend = y1,
+    color = shade,
+    size = size
+  )) +
+    geom_segment(show.legend = FALSE) +
+    geom_point(aes(x = x1, y = y1), size = 3, shape = 18, color = "yellow", alpha = 0.7) +  
+    # Add diamond-shaped, yellow, transparent points
+    coord_polar() +
+    scale_y_continuous(expand = c(0, 0)) +
+    scale_x_continuous(expand = c(0, 0)) + 
+    
+    # Add color palette
+    scale_color_manual(values = custom_colors) + 
+    theme_void() + 
+    
+    # Format theme with plot background, title, subtitle, and caption
+    theme(plot.caption = element_text(hjust = 0)) +
+    theme(
+      plot.background = element_rect(fill = "black"),
+      panel.background = element_rect(fill = "black"),
+      plot.title = element_text(color = "white", hjust = 0.5),
+      plot.subtitle = element_text(color = "white", hjust = 0.5),
+      plot.caption = element_text(color = "white", hjust = 0.5)
+    ) +
+    labs(
+      title = title,
+      caption = caption
+    )
+  
+  return(plot)
+}
 
-custom_colors <- c("#FF69B4", "#FF1493", "#DB7093")
+#my usage 
 
-# Create the segment plot
-ggplot(iris, aes(
-  x = x0,
-  y = y0,
-  xend = x1,
-  yend = y1,
-  color = shade,
-  size = size
-)) +
-  geom_segment(show.legend = FALSE) +
-  geom_point(aes(x = x1, y = y1), size = 3, shape = 18, color = "yellow", alpha = 0.7) +  
-  # Add diamond-shaped, yellow, transparent points
-  coord_polar() +
-  scale_y_continuous(expand = c(0, 0)) +
-  scale_x_continuous(expand = c(0, 0)) + 
-  scale_color_manual(values = custom_colors) + 
-  theme_void() + 
-  theme(plot.caption = element_text(hjust = 0)) +
-  theme(
-    plot.background = element_rect(fill = "black"),
-    panel.background = element_rect(fill = "black"),
-    plot.title = element_text(color = "white", hjust = 0.5),
-    plot.subtitle = element_text(color = "white", hjust = 0.5),
-    plot.caption = element_text(color = "white", hjust = 0.5)
-  ) +
-  labs(
-    title = "Flower Wave",
-    caption = "Polar Plot of Iris Dataset with Segments"
-  )
+polar_plot <- create_polar_plot(iris, "Flower Wave", "Polar Plot of Iris Datset with Segments")
 
 
 
